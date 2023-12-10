@@ -1,0 +1,4 @@
+1 lavare
+2 stendere
+3 stirare
+4 sistemare
