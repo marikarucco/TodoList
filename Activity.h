@@ -8,33 +8,58 @@ class Activity {
 private:
     int id;
     string description;
-
+    bool done;
 public:
-    Activity() {}
+    Activity() {
+        id = 0;
+        description = "";
+        done = false;
+    }
 
-    Activity(int id, const string description)
+    Activity(int _id, const string& _description, bool _done)
     {
-        this->id = id;
-        this->description = description;
+        id = _id;
+        description = _description;
+        done = _done;
     }
 
-    void setId(int id) {
-        this->id = id;
+    bool operator == (const Activity& a) const{
+        return id == a.id && description == a.description && done == a.done;
     }
 
+    bool operator != (const Activity& a) const{
+        return !operator==(a);
+    }
+
+    bool operator < (const Activity& a) const{
+        return id < a.id;
+    }
+
+    void setId(int _id) {
+        id = _id;
+    }
 
     int getId(){
-        return this->id;
+        return Activity::id;
     }
 
-    void setDescription(const string description) {
-        this->description = description;
+    void setDescription(const string& _description) {
+        description = _description;
     }
 
     string getDescription()
     {
-        return this->description;
+        return Activity::description;
     }
+
+    void setDone(bool _done){
+        done = _done;
+    }
+
+    bool getDone(){
+        return Activity::done;
+    }
+
 
 };
 
