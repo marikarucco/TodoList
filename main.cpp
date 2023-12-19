@@ -5,15 +5,19 @@ using namespace std;
 
 int main() {
     int n;
-    ActivityList l ("lista");
+    ActivityList l("mylist");
     cout << "Inserire il numero di task da svolgere: " << endl;
     cin >> n;
     cin.ignore();
     for (int i=1; i< n+1; i++){
         string activityDescription;
-        cout << "Inserire task numero " << i << ":" << endl;
+        int duration;
+        cout << "Inserire task numero " << i << ": " << endl;
         getline(cin, activityDescription);
-        Activity a (i, activityDescription, false);
+        cout << "Inserire la durata in minuti del task:" << endl;
+        cin >> duration;
+        cin.ignore(1, '\n');
+        Activity a (i, activityDescription, false, duration);
         l.addActivity(a);
     }
     string save;

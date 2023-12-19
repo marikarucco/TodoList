@@ -1,6 +1,7 @@
 #ifndef TODOLIST_ACTIVITY_H
 #define TODOLIST_ACTIVITY_H
 #include <string>
+#include <iostream>
 using namespace std;
 
 class Activity {
@@ -9,22 +10,16 @@ private:
     int id;
     string description;
     bool done;
+    int duration;
+
 public:
-    Activity() {
-        id = 0;
-        description = "";
-        done = false;
-    }
-
-    Activity(int _id, const string& _description, bool _done)
+    Activity() : id(0), description(), done(false), duration(0) {};
+    Activity(int id, const string& description, bool done, int duration) : id(id), description(description), done(done)
     {
-        id = _id;
-        description = _description;
-        done = _done;
-    }
-
+        setDuration(duration);
+    };
     bool operator == (const Activity& a) const{
-        return id == a.id && description == a.description && done == a.done;
+        return id == a.id && description == a.description && done == a.done && duration == a.duration;
     }
 
     bool operator != (const Activity& a) const{
@@ -35,32 +30,41 @@ public:
         return id < a.id;
     }
 
-    void setId(int _id) {
-        id = _id;
+    void setId(int i) {
+        id = i;
     }
 
-    int getId(){
+    [[nodiscard]] int getId() const{
         return Activity::id;
     }
 
-    void setDescription(const string& _description) {
-        description = _description;
+    void setDescription(const string& d) {
+        description = d;
     }
 
-    string getDescription()
+    [[nodiscard]] string getDescription() const
     {
         return Activity::description;
     }
 
-    void setDone(bool _done){
-        done = _done;
+    void setDone(bool d){
+        done = d;
     }
 
-    bool getDone(){
+    [[nodiscard]] bool getDone() const{
         return Activity::done;
     }
 
+    void setDuration(int d){
+        if(d<0)
+            throw invalid_argument("Duration can't be negative");
+        else
+            duration = d;
+    }
 
+    [[nodiscard]] int getDuration() const{
+        return Activity::duration;
+    }
 };
 
 

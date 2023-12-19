@@ -8,31 +8,33 @@ using namespace std;
 
 class ActivityList {
 private:
-    int size;
     string name;
+    list <Activity> activitiesToDo;
 public:
-    list <Activity> activitiesToDo = list <Activity>();
+    ActivityList () : name(), activitiesToDo(){};
+    explicit ActivityList(const string& name) : name(name) {};
+
+    [[nodiscard]] string getName() const{
+        return name;
+    }
+    void setName(const string& n){
+        name = n;
+    }
+    [[nodiscard]] list<Activity> getActivitiesToDo () const{
+        return activitiesToDo;
+    };
     void addActivity(const Activity& a);
     void removeActivity(const Activity& a);
-    bool searchActivity(const Activity& a);
-    void modifyActivity(Activity& a, int _id, const string& _description, bool d_);
-    int getActivitiesToDo();
-    void saveList(const string& file);
+    [[nodiscard]] int getSize() const;
+    void getListSorted();
+    [[nodiscard]] bool searchActivity(const Activity& a) const;
+    [[nodiscard]] Activity searchActivityByDescription(const string& d) const;
+    void modifyActivity(Activity& a, int id, const string& description, bool done, int duration);
+    [[nodiscard]] int getNumActivitiesToDo() const;
+    [[nodiscard]] list<Activity> getListOfUndone () const;
+    void saveList(const string& file) const;
     void readList(const string& file, int n);
-    ActivityList(){
-        size = 0;
-        name = "";
-    }
-    explicit ActivityList(const string& _name){
-        size = 0;
-        name = _name;
-    }
-    int getSize() {
-        return ActivityList::size;
-    }
-    string getName(){
-        return ActivityList::name;
-    }
+
 };
 
 
