@@ -1,8 +1,0 @@
-# ninja log v5
-1	1626	7239170041502842	CMakeFiles/runAllTests.dir/ActivityListFixture.cpp.obj	6c0611a49676bc89
-74	5364	7239170078945752	CMakeFiles/runAllTests.dir/runAllTests.cpp.obj	283beab3e2d0982a
-177	6077	7239170086076877	CMakeFiles/runAllTests.dir/ActivityListTest.cpp.obj	70de1e2137970734
-1628	6493	7239170090291395	lib/googletest/googletest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.obj	930dd1082091383c
-5373	20694	7239170231978400	lib/googletest/googletest/CMakeFiles/gtest.dir/src/gtest-all.cc.obj	56c0f149e8959651
-20702	27169	7239170297052284	lib/libgtest.a	958cf25d41b38921
-27170	27337	7239170298747325	lib/libgtest_main.a	3bed59ecc4bb4c28
