@@ -17,8 +17,14 @@ int main() {
         cout << "Inserire la durata in minuti del task:" << endl;
         cin >> duration;
         cin.ignore(1, '\n');
-        Activity a (i, activityDescription, false, duration);
-        l.addActivity(a);
+        try{
+            Activity a (i, activityDescription, false, duration);
+            l.addActivity(a);
+        }
+        catch (invalid_argument& e){
+            cout << "Durata non valida, elemento non aggiunto alla lista" << endl;
+        }
+
     }
     string save;
     string review;

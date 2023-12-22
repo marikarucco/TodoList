@@ -37,7 +37,7 @@ bool ActivityList::searchActivity(const Activity& a) const {
 }
 
 Activity ActivityList::searchActivityByDescription(const string& d) const{
-    Activity a;
+    Activity a (0, "", false, 0);
     for(const Activity& item : activitiesToDo){
         if(item.getDescription() == d){
             a = item;
@@ -68,9 +68,7 @@ list<Activity> ActivityList::getListOfUndone() const {
 }
 
 void ActivityList::modifyActivity(Activity& a, int id, const string& description, bool done, int duration){
-    removeActivity(a);
-    Activity b(id, description, done, duration);
-    addActivity(b);
+  a = Activity(id, description, done, duration);
 }
 
 void ActivityList::saveList(const string& fileName) const {

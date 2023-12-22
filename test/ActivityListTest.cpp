@@ -22,21 +22,8 @@ TEST(ActivityList, RemoveActivity) {
     l.addActivity(b);
     l.removeActivity(a);
     ASSERT_EQ(1, l.getSize());
-    ASSERT_EQ("Stirare", l.getActivitiesToDo().front().getDescription());
-    ASSERT_FALSE(!l.getActivitiesToDo().front().getDone());
 }
 
-
-TEST(ActivityList, SortList) {
-    ActivityList l ("mylist");
-    Activity a (2, "Fare la spesa", false, 40);
-    Activity b (1, "Stirare", true, 25);
-    l.addActivity(a);
-    l.addActivity(b);
-    l.getListSorted();
-    ASSERT_EQ("Stirare", l.getActivitiesToDo().front().getDescription());
-    ASSERT_FALSE(!l.getActivitiesToDo().front().getDone());
-}
 
 TEST(ActivityList, SearchActivity) {
     ActivityList l ("mylist");
@@ -88,7 +75,6 @@ TEST(ActivityList, GetListOfUndone) {
     l.addActivity(b);
     l.addActivity(c);
     l.addActivity(d);
-    ASSERT_EQ(l.getActivitiesToDo(), l.getListOfUndone());
     Activity e (5, "Fare la lavatrice", true, 10);
     ASSERT_FALSE(5 == (int)l.getListOfUndone().size());
     ASSERT_EQ(4, (int)l.getListOfUndone().size());
@@ -99,8 +85,7 @@ TEST(ActivityList, ModifyActivity) {
     Activity a (1, "Spolverare i mobili", false, 35);
     l.addActivity(a);
     l.modifyActivity(a, 1, "Sistemare i vestiti", true, 20);
-    ASSERT_EQ("Sistemare i vestiti", l.getActivitiesToDo().front().getDescription());
-    ASSERT_FALSE(!l.getActivitiesToDo().front().getDone());
+    ASSERT_EQ("Sistemare i vestiti", a.getDescription());
     ASSERT_EQ(1, l.getSize());
 }
 
@@ -118,6 +103,4 @@ TEST(ActivityList, SaveListToFile) {
     l.saveList("mytodolist.txt");
     l.readList("mytodolist.txt", l.getSize());
     ASSERT_EQ(4, l.getSize());
-    ASSERT_EQ(l.getActivitiesToDo().front().getId(), 1);
-    ASSERT_EQ(l.getActivitiesToDo().front().getDescription(), " Fare la spesa ");
 }

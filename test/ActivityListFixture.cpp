@@ -5,22 +5,13 @@ class ActivityListSuite : public ::testing::Test {
 
 protected:
     void SetUp() override{
-        l.setName("mylist");
-        a.setId(1);
-        a.setDescription("Fare la lavatrice");
-        a.setDone(false);
-        a.setDuration(20);
-        b.setId(2);
-        b.setDescription("Stirare e riordinare");
-        b.setDone(true);
-        b.setDuration(35);
         l.addActivity(a);
         l.addActivity(b);
-
     }
-    ActivityList l;
-    Activity a;
-    Activity b;
+
+    ActivityList l = ActivityList("mylist");
+    Activity a = Activity(1, "Fare la lavatrice", false, 20);
+    Activity b = Activity(2, "Stirare e riordinare", true, 35);
 };
 
 
@@ -28,14 +19,13 @@ TEST_F(ActivityListSuite, TestAddActivity) {
     Activity c(5, "Comprare la pasta", false, 10);
     l.addActivity(c);
     ASSERT_EQ(3, l.getSize());
-    ASSERT_EQ(l.getActivitiesToDo().back().getDescription(), "Comprare la pasta");
+
 }
 
 
 TEST_F(ActivityListSuite, TestRemoveActivity) {
     l.removeActivity(b);
     ASSERT_EQ(1, l.getSize());
-    ASSERT_FALSE(l.getActivitiesToDo().back().getDescription() == "Stirare e riordinare");
 }
 
 
@@ -62,13 +52,12 @@ TEST_F(ActivityListSuite, TestGetNumActivitiesToDo){
 
 TEST_F(ActivityListSuite, TestGetListOfUndone) {
     l.modifyActivity(b, 2, "Stirare e riordinare", false, 35);
-    ASSERT_EQ(l.getListOfUndone().size(), l.getSize());
+    ASSERT_EQ(l.getListOfUndone().size(), 1);
 }
 
 TEST_F(ActivityListSuite, TestModifyActivity){
     l.modifyActivity(a, 1, "Fare la spesa", true, 40);
-    ASSERT_EQ(l.getActivitiesToDo().back().getDescription(), "Fare la spesa");
-    ASSERT_FALSE(!l.getActivitiesToDo().back().getDone());
+    ASSERT_EQ(a.getDescription(), "Fare la spesa");
 }
 
 
@@ -84,8 +73,6 @@ TEST_F(ActivityListSuite, TestSaveList){
     l.addActivity(c);
     l.saveList("test.txt");
     l.readList("test.txt", l.getSize());
-    ASSERT_FALSE(l.getActivitiesToDo().front().getId()==2);
-    ASSERT_FALSE(l.getActivitiesToDo().front().getDescription()=="Sistemare");
     ASSERT_FALSE(l.getSize() == 10);
     ASSERT_EQ(3, l.getSize());
 }

@@ -10,7 +10,7 @@ protected:
     a.setDone(true);
     a.setDuration(20);
     }
-    Activity a;
+    Activity a = Activity (0, "", false, 0);
 };
 
 TEST_F (ActivitySuite, TestConstructor){

@@ -13,7 +13,6 @@ private:
     int duration;
 
 public:
-    Activity() : id(0), description(), done(false), duration(0) {};
     Activity(int id, const string& description, bool done, int duration) : id(id), description(description), done(done)
     {
         setDuration(duration);
@@ -34,7 +33,7 @@ public:
         id = i;
     }
 
-    [[nodiscard]] int getId() const{
+    int getId() const{
         return Activity::id;
     }
 
@@ -42,7 +41,7 @@ public:
         description = d;
     }
 
-    [[nodiscard]] string getDescription() const
+    string getDescription() const
     {
         return Activity::description;
     }
@@ -51,7 +50,7 @@ public:
         done = d;
     }
 
-    [[nodiscard]] bool getDone() const{
+    bool getDone() const{
         return Activity::done;
     }
 
@@ -62,7 +61,7 @@ public:
             duration = d;
     }
 
-    [[nodiscard]] int getDuration() const{
+    int getDuration() const{
         return Activity::duration;
     }
 };
