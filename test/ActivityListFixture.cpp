@@ -19,6 +19,9 @@ TEST_F(ActivityListSuite, TestAddActivity) {
     Activity c(5, "Comprare la pasta", false, 10);
     l.addActivity(c);
     ASSERT_EQ(3, l.getSize());
+    ASSERT_EQ(l.searchActivityByDescription("Comprare la pasta").getId(), 5);
+    ASSERT_FALSE(l.searchActivityByDescription("Comprare la pasta").getDone());
+
 
 }
 
@@ -26,6 +29,7 @@ TEST_F(ActivityListSuite, TestAddActivity) {
 TEST_F(ActivityListSuite, TestRemoveActivity) {
     l.removeActivity(b);
     ASSERT_EQ(1, l.getSize());
+    ASSERT_FALSE(l.searchActivity(b));
 }
 
 
@@ -40,6 +44,8 @@ TEST_F(ActivityListSuite, TestSearchActivity) {
 
 TEST_F(ActivityListSuite, TestSearchActivityByDescription) {
     ASSERT_EQ(l.searchActivityByDescription("Fare la lavatrice"), a);
+    ASSERT_FALSE(!(l.searchActivityByDescription("Stirare e riordinare").getDone()));
+    ASSERT_FALSE(l.searchActivityByDescription("Stirare e riordinare").getDuration()==45);
 }
 
 TEST_F(ActivityListSuite, TestGetNumActivitiesToDo){
@@ -51,8 +57,10 @@ TEST_F(ActivityListSuite, TestGetNumActivitiesToDo){
 
 
 TEST_F(ActivityListSuite, TestGetListOfUndone) {
-    l.modifyActivity(b, 2, "Stirare e riordinare", false, 35);
     ASSERT_EQ(l.getListOfUndone().size(), 1);
+    ASSERT_FALSE(l.getListOfUndone().front().getDescription()== "Uscire per commissioni");
+    ASSERT_EQ(l.getListOfUndone().front().getDuration(), 20);
+
 }
 
 TEST_F(ActivityListSuite, TestModifyActivity){
@@ -66,6 +74,7 @@ TEST_F(ActivityListSuite, TestGetSize) {
     Activity a(1, "Rifare il letto", false, 5);
     l.addActivity(a);
     ASSERT_FALSE(2 == l.getSize());
+    ASSERT_EQ(l.searchActivity(a), true);
 }
 
 TEST_F(ActivityListSuite, TestSaveList){

@@ -12,6 +12,7 @@ TEST(ActivityList, AddActivity) {
     Activity a (1, "Fare la spesa", false, 40);
     l.addActivity(a);
     ASSERT_FALSE(l.getSize()== 0);
+    ASSERT_EQ(true, l.searchActivity(a));
 }
 
 TEST(ActivityList, RemoveActivity) {
@@ -22,6 +23,10 @@ TEST(ActivityList, RemoveActivity) {
     l.addActivity(b);
     l.removeActivity(a);
     ASSERT_EQ(1, l.getSize());
+    ASSERT_FALSE(l.searchActivity(a));
+    ASSERT_EQ(l.searchActivityByDescription("Stirare").getId(), b.getId());
+    ASSERT_EQ(l.searchActivityByDescription("Stirare").getDone(), b.getDone());
+    ASSERT_EQ(l.searchActivityByDescription("Stirare").getDuration(), b.getDuration());
 }
 
 
@@ -44,10 +49,14 @@ TEST(ActivityList, SearchActivityByDescription) {
     l.addActivity(a);
     l.addActivity(b);
     Activity c = l.searchActivityByDescription("Preparare la colazione");
+    Activity d = l.searchActivityByDescription("Fare la spesa");
     ASSERT_EQ(a.getId(), c.getId());
     ASSERT_EQ(a.getDescription(), c.getDescription());
     ASSERT_EQ(a.getDone(), c.getDone());
     ASSERT_EQ(a.getDuration(), c.getDuration());
+    ASSERT_FALSE(d.getId() == 1);
+    ASSERT_FALSE(d.getDone());
+    ASSERT_FALSE(d.getDuration()==50);
 }
 
 
@@ -63,6 +72,8 @@ TEST(ActivityList, GetNumActivitiesToDo) {
     l.addActivity(d);
     ASSERT_EQ(2, l.getNumActivitiesToDo());
     ASSERT_FALSE(l.getNumActivitiesToDo() == 4);
+    ASSERT_EQ(l.getListOfUndone().front().getDescription(), "Fare la spesa");
+    ASSERT_FALSE(l.getListOfUndone().front().getId() == 1);
 }
 
 TEST(ActivityList, GetListOfUndone) {
@@ -78,6 +89,8 @@ TEST(ActivityList, GetListOfUndone) {
     Activity e (5, "Fare la lavatrice", true, 10);
     ASSERT_FALSE(5 == (int)l.getListOfUndone().size());
     ASSERT_EQ(4, (int)l.getListOfUndone().size());
+    ASSERT_EQ(l.getListOfUndone().front().getDescription(), "Spolverare i mobili");
+    ASSERT_FALSE(!(l.getListOfUndone().front().getId() == 1));
 }
 
 TEST(ActivityList, ModifyActivity) {
@@ -87,6 +100,7 @@ TEST(ActivityList, ModifyActivity) {
     l.modifyActivity(a, 1, "Sistemare i vestiti", true, 20);
     ASSERT_EQ("Sistemare i vestiti", a.getDescription());
     ASSERT_EQ(1, l.getSize());
+    ASSERT_FALSE(l.searchActivityByDescription("Sistemare i vestiti").getDuration()==35);
 }
 
 

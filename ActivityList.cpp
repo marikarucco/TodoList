@@ -37,9 +37,9 @@ bool ActivityList::searchActivity(const Activity& a) const {
 }
 
 Activity ActivityList::searchActivityByDescription(const string& d) const{
-    Activity a (0, "", false, 0);
+    Activity a = Activity(0, "", false, 0);
     for(const Activity& item : activitiesToDo){
-        if(item.getDescription() == d){
+        if(item.getDescription() == d) {
             a = item;
             break;
         }
