@@ -1,4 +1,0 @@
-1 spesa
-2 dolce
-3 lavatrice
-4 stendere
